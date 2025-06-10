@@ -25,9 +25,6 @@ All harvested data is funneled into a clean, unified format and stored in a Post
 - **Logging**: Pino
 
 
-This is the scraping backbone of a larger ecosystem. The goal is not just to build tech, but to help people — fast, clean, and at scale.
-
-
 ### Part of the Street Ninja Ecosystem
 
 - 🧠 [Street Ninja SMS App](https://github.com/FirstFlush/street_ninja) — SMS app for finding essential resources by text message
