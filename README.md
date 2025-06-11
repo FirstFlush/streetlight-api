@@ -23,6 +23,7 @@ All harvested data is funneled into a clean, unified format and stored in a Post
 - **Parsing/Validation**: Zod
 - **Scheduling**: `@nestjs/schedule`
 - **Logging**: Pino
+- **Testing**: Jest
 
 
 ## 💡 Know a Data Source?
