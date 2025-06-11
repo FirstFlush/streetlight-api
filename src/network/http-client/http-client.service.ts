@@ -19,9 +19,13 @@ export class HttpClientService {
 
     private async request<T>(config: AxiosRequestConfig): Promise<T> {
         try {
-            const response = await this.axios.request<T>(config);
-            this.logger.debug(`HTTP request successfull. Status code ${response.status} for url ${config.url}`)
-            return response.data
+            const response = await this.axios.request(config);
+            this.logger.debug(`HTTP request successful. Status code ${response.status} for url ${config.url}`)
+
+            const data = config.responseType === 'arraybuffer'
+                ? (Buffer.from(response.data) as T)
+                : (response.data as T);
+            return data
         } catch (err) {
             let status: number | undefined
             if (axios.isAxiosError(err) && err.response) {
