@@ -6,6 +6,7 @@ import { NetworkModule } from '@/network/network.module';
 
 @Module({
   imports: [NetworkModule],
-  providers: [WebScraperService, PdfScraperService]
+  providers: [WebScraperService, PdfScraperService],
+  exports: [WebScraperService, PdfScraperService],
 })
 export class ScrapingModule {}
