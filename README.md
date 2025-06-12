@@ -1,48 +1,63 @@
-# ninja-crawl
+# Streetlight API
 
-![WIP](https://img.shields.io/badge/status-WIP-blueviolet?style=for-the-badge) 
->this repo is in active early-stage development. Expect bugs, breakage, and rapid iteration.
+![WIP](https://img.shields.io/badge/status-WIP-blueviolet?style=for-the-badge)  
+> This repo is in active early-stage development. Expect bugs, breakage, and rapid iteration.
 
-**ninja-crawl** is a NestJS-powered scraping framework built to collect, normalize, and store data relevant to low-income and homeless individuals across the Lower Mainland (BC, Canada). The goal is to build the most comprehensive, real-time database of resources available to someone in crisis — including food programs, shelter availability, hygiene services, public internet, and more.
+**Streetlight API** is the public infrastructure layer of the Street Ninja ecosystem — a clean, standards-based API for exposing real-time resource data to support homeless and low-income individuals in Vancouver.
 
-This project will aggregate data from a wide variety of sources:
-- Public websites (via HTML scraping)
-- PDF documents (using PDF parsers)
-- Open APIs (from municipal, nonprofit, and health organizations)
+The goal is to make Streetlight API the most accurate and up-to-date source of crisis resources available, built not just for Street Ninja, but for any nonprofit, outreach team, or civic tech project that wants to help.
 
-All harvested data is funneled into a clean, unified format and stored in a PostgreSQL database. From there, it can be exposed via API to support projects like [Street Ninja](https://streetninja.ca) and other community-led initiatives.
+This app is responsible for:
+
+- Scheduling scraping jobs (HTML, PDF, API)
+- Passing raw content to the Python-powered [Ninja Crawl](https://github.com/FirstFlush/ninja_crawl) scraping engine
+- Validating, normalizing, and storing structured resource data (shelters, meals, hygiene, etc.)
+- Exposing a clean, public-facing API
 
 
-## Tech Stack
+## 🔗 Architecture
 
-- **Language**: TypeScript (strict mode)
+Streetlight API delegates all parsing logic to [**Ninja Crawl**](https://github.com/FirstFlush/ninja_crawl), a standalone Python FastAPI service. This app never scrapes HTML or PDFs directly — instead, it handles orchestration:
+
+1. Fetches raw content (using Axios, Playwright, or external APIs)
+2. Sends raw data to Ninja Crawl (`POST /scrape`)
+3. Validates the response using Zod schemas
+4. Saves the result to PostgreSQL via Prisma
+
+
+## 🧱 Tech Stack
+
+- **Language**: TypeScript (strict)
 - **Framework**: NestJS
-- **Scraping Tools**: Playwright, Cheerio, Axios, pdf-parse
-- **Database**: PostgreSQL (via Prisma ORM)
-- **Job Queue**: BullMQ (Redis-backed async scraping jobs)
-- **Parsing/Validation**: Zod
+- **HTTP Client**: Axios
+- **Browser Automation**: Playwright
+- **Database**: PostgreSQL (Prisma ORM)
+- **Scraping Queue**: BullMQ (Redis-backed jobs)
+- **Validation**: Zod
 - **Scheduling**: `@nestjs/schedule`
 - **Logging**: Pino
 - **Testing**: Jest
 
 
-## 💡 Know a Data Source?
+## 🔍 Know a Data Source?
 
-If you’re aware of a public website, PDF, API, or any source of useful information for homeless or low-income individuals in BC — please reach out.
+Know of a website, PDF, or open data portal that lists services for unhoused or low-income people in BC?
 
-I'm always looking for new data to scrape, parse, and include in the Street Ninja resource network.
+Please reach out. I’m always looking to expand the dataset that powers Street Ninja.
 
-Open an issue, start a discussion, or [email me](mailto:firstflush@protonmail.com). Let's make this dataset better together.
+Start a discussion, open an issue, or [email me](mailto:firstflush@protonmail.com).
 
 
-## Part of the Street Ninja Ecosystem
+## 🕸 Street Ninja Ecosystem
 
-- 🧠 [Street Ninja SMS App](https://github.com/FirstFlush/street_ninja) — SMS app for finding essential resources by text message
-- 🌐 [Street Ninja Website](https://github.com/FirstFlush/website_street_ninja) — public-facing site and map of live resource data
+- [Streetlight API (you are here)](https://github.com/FirstFlush/streetlight-api) — orchestrates scraping and exposes public API
+- [Ninja Crawl](https://github.com/FirstFlush/ninja_crawl) — Python-based scraping engine (HTML/PDF → JSON)
+- [Street Ninja SMS App](https://github.com/FirstFlush/street_ninja) — SMS assistant for accessing resources by text
+- [Street Ninja Website](https://github.com/FirstFlush/website_street_ninja) — map and public frontend
 
 
 ## ☕ Support This Project
 
-If you believe in what I'm building and want to help cover hosting, SMS infrastructure, or even just a cup of coffee while I write scrapers at 2am:
+If you believe in what I'm building and want to help cover hosting or SMS costs:
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-yellow?logo=buy-me-a-coffee&style=for-the-badge)](https://www.buymeacoffee.com/firstflush)
