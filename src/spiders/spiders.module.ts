@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TwoOneOneModule } from './two-one-one/two-one-one.module';
+import { TwoOneOneModule } from './bc211/bc211.module';
 
 @Module({
   imports: [TwoOneOneModule],

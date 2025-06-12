@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { PdfShelterSpider } from '@/spiders/two-one-one/pdf-shelter-spider';
+import { PdfShelterSpider } from '@/spiders/bc211/pdf-shelter-spider';
 
 @Controller('ping')
 export class DevController {
