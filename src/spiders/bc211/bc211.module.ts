@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { TwoOneOneHomelessSearchSpider } from './homeless-search-spider';
+import { BC211SearchSpider } from './search/search-results.spider';
 import { NetworkModule } from '@/network/network.module';
-import { ScrapingModule } from '@/scraping/scraping.module';
-import { PdfShelterSpider } from './pdf-shelter-spider';
+import { BrowserModule } from '@/browser/browser.module';
+import { BC211PdfSpider } from './pdf/pdf-shelter.spider';
 
 @Module({
-    imports: [NetworkModule, ScrapingModule],
-    providers: [TwoOneOneHomelessSearchSpider, PdfShelterSpider],
-    exports: [TwoOneOneHomelessSearchSpider, PdfShelterSpider],
+    imports: [NetworkModule, BrowserModule],
+    providers: [BC211SearchSpider, BC211PdfSpider],
+    exports: [BC211SearchSpider, BC211PdfSpider],
 })
-export class TwoOneOneModule {}
+export class BC211Module {}

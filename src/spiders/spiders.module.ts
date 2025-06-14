@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TwoOneOneModule } from './bc211/bc211.module';
+import { BC211Module } from './bc211/bc211.module';
 
 @Module({
-  imports: [TwoOneOneModule],
-  exports: [TwoOneOneModule],
+  imports: [BC211Module],
+  exports: [BC211Module],
 })
+
 export class SpidersModule {}
