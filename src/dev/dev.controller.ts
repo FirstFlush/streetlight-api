@@ -1,17 +1,19 @@
 import { Controller, Get } from '@nestjs/common';
-import { PdfShelterSpider } from '@/spiders/bc211/pdf-shelter-spider';
+import { BC211PdfSpider } from '@/spiders/bc211/pdf/pdf-shelter.spider';
+
+
 
 @Controller('ping')
 export class DevController {
 
-    constructor(private readonly spider: PdfShelterSpider) {}
+    constructor(private readonly spider: BC211PdfSpider) {}
 
     @Get()
-    async run(): Promise<any> {
+    async run(): Promise<Buffer> {
     // async run(): Promise<Record<string, string>> {
 
         // return {"ping":"PONG"}
 
-        return this.spider.parsePdf();
+        return await this.spider.fetchPdfData();
     }
 }

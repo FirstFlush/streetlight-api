@@ -1,8 +1,10 @@
+
 export class HttpRequestException extends Error {
   constructor(
     message: string,
-    public readonly cause?: unknown,
+    public readonly cause?: unknown
   ) {
-    super(message);
+    super(message, cause ? { cause } : undefined);
+    this.name = 'HttpRequestException';
   }
 }
