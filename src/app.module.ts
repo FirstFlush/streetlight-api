@@ -5,12 +5,19 @@ import { NetworkModule } from './network/network.module';
 import { LoggerModule } from 'nestjs-pino';
 import { pinoConfig } from './config/logger.config';
 import { SpidersModule } from './spiders/spiders.module';
-import { DevController } from './dev/dev.controller';
+import { TestSpiderController } from './dev/dev.controller';
 import { BrowserModule } from './browser/browser.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [NetworkModule, LoggerModule.forRoot(pinoConfig), SpidersModule, BrowserModule],
-  controllers: [AppController, DevController],
+  imports: [
+    ConfigModule.forRoot({isGlobal: true}), 
+    LoggerModule.forRoot(pinoConfig),
+    NetworkModule,  
+    SpidersModule, 
+    BrowserModule
+  ],
+  controllers: [AppController, TestSpiderController],
   providers: [AppService],
 })
 export class AppModule {}

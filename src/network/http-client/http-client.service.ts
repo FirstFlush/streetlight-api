@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { GetRequestOptions, NinjaCrawlRequestOptions, NinjaCrawlResponse, PostRequestOptions } from './http.types';
+import { GetRequestOptions, NinjaCrawlRequestOptions, NinjaCrawlResponse, PostRequestOptions } from './types';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
-import { HttpRequestException } from './http.exc';
+import { HttpRequestException } from './exc';
 
 
 @Injectable()
@@ -61,7 +61,8 @@ export class HttpClientService {
         return this.request<T>(config);
     }
 
-    public async ninjaCrawlRequest<NinjaCrawlResponse>(options: NinjaCrawlRequestOptions): Promise<NinjaCrawlResponse> {
+    public async ninjaCrawl<NinjaCrawlResponse>(options: NinjaCrawlRequestOptions): Promise<NinjaCrawlResponse> {
+        console.log(`URL: ${process.env.NINJA_CRAWL_URL}`)
         const config: AxiosRequestConfig = {
             url: process.env.NINJA_CRAWL_URL,
             method: "POST",

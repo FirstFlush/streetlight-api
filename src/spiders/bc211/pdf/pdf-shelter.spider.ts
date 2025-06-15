@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { HttpClientService } from "@/network/http-client/http-client.service";
-import { ScrapeEndpoints } from "@/spiders/endpoints.constants";
+import { spiderRegistry } from "@/spiders/registry";
 
 @Injectable()
 export class BC211PdfSpider {
@@ -10,7 +10,7 @@ export class BC211PdfSpider {
 
 
     async fetchPdfData(): Promise<Buffer> {
-        return this.http.get(ScrapeEndpoints.bc211.pdf, {
+        return this.http.get(spiderRegistry.bc211.pdf.url, {
             responseType: "arraybuffer"
         })
     }

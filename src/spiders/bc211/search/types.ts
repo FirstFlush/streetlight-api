@@ -1,4 +1,16 @@
 
+// loose shape just to give me type hints
+export type BC211SearchResultRaw = {
+  type?: unknown;
+  name_primary?: unknown;
+  description?: unknown;
+  last_verified_on?: unknown;
+  lastVerifiedOn?: unknown;
+  contactDetails?: { contact: any }[];
+  [key: string]: unknown;
+};
+
+
 export interface BC211SearchResult {
   type: string;
   name_primary: string;

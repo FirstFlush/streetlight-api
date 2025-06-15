@@ -14,7 +14,7 @@ export interface PostRequestOptions<T = unknown> extends RequestOptions {
 
 export interface NinjaCrawlRequestData {
     spider_key: string
-    raw_data: Uint8Array | string
+    raw_data: Uint8Array | string | object
     metadata?: Record<string, any>
 }
 
