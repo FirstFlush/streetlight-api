@@ -8,6 +8,7 @@ import { SpidersModule } from './spiders/spiders.module';
 import { TestSpiderController } from './dev/dev.controller';
 import { BrowserModule } from './browser/browser.module';
 import { ConfigModule } from '@nestjs/config';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { ConfigModule } from '@nestjs/config';
     LoggerModule.forRoot(pinoConfig),
     NetworkModule,  
     SpidersModule, 
-    BrowserModule
+    BrowserModule, PrismaModule
   ],
   controllers: [AppController, TestSpiderController],
   providers: [AppService],
