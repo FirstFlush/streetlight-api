@@ -18,9 +18,9 @@ export class SpiderParseError extends SpiderException {
 }
 
 
-export class SpiderTimeoutException extends SpiderException {
-  constructor(message = 'Spider timed out') {
+export class SpiderNetworkError extends SpiderException {
+  constructor(message = 'Error fetching network resource') {
     super(message);
-    this.name = 'SpiderTimeoutException';
+    this.name = 'SpiderNetworkException';
   }
 }

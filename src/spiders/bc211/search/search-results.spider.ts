@@ -4,20 +4,18 @@ import { spiderRegistry } from "../../registry";
 import { InjectPinoLogger, PinoLogger } from "nestjs-pino";
 import { Page } from "playwright-core";
 import { BC211SearchResult, BC211SearchResultRaw } from "./types";
-import { SpiderParseError, SpiderTimeoutException } from "@/spiders/spiders.exc";
-
+import { SpiderParseError, SpiderNetworkError } from "@/spiders/exc";
+import { Spider } from "@/spiders/types";
 
 @Injectable()
-export class BC211SearchSpider {
+export class BC211SearchSpider implements Spider<BC211SearchResult[]> {
     constructor(
         private readonly chromium: ChromiumService,
         @InjectPinoLogger(BC211SearchSpider.name)
         private readonly logger: PinoLogger,
     ) {}
 
-    getKey(): string {
-        return spiderRegistry.bc211.searchResults.key
-    }
+    key = spiderRegistry.bc211.searchResults.key
 
     async scrape(): Promise<BC211SearchResult[]> {
         const page = await this.chromium.newPage()
@@ -25,9 +23,9 @@ export class BC211SearchSpider {
         if (response?.ok) {
             return await this.getResults(page)
         }
-        const msg = `Request timeout for endpoint ${spiderRegistry.bc211.searchResults.url}`
+        const msg = `Status code ${response?.status}. Could not get resource at ${spiderRegistry.bc211.searchResults.url}`
         this.logger.error(msg)
-        throw new SpiderTimeoutException(msg)
+        throw new SpiderNetworkError(msg)
     }
 
     async getResults(page: Page): Promise<BC211SearchResult[]> {

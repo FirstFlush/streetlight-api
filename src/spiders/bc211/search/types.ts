@@ -1,4 +1,7 @@
 
+
+
+
 // loose shape just to give me type hints
 export type BC211SearchResultRaw = {
   type?: unknown;
@@ -9,6 +12,9 @@ export type BC211SearchResultRaw = {
   contactDetails?: { contact: any }[];
   [key: string]: unknown;
 };
+
+
+export type PdfData = Uint8Array;
 
 
 export interface BC211SearchResult {

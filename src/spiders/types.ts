@@ -1,9 +1,10 @@
-interface SpiderRegistryValue {
-    key: string;
-    url: string;
-    label?: string;
+
+export interface Spider<T> {
+  scrape(): Promise<T>;
+  key: string;
 }
 
-interface SpiderRegistry {
-    records: Record<string, SpiderRegistryValue>
+export interface Pipeline<T> {
+  validate(data: unknown): T;
+  save(data: T): Promise<void>;
 }

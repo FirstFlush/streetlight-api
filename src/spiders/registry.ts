@@ -1,4 +1,5 @@
 
+
 export const spiderRegistry = {
   bc211: {
     searchResults: {
@@ -14,4 +15,4 @@ export const spiderRegistry = {
   },
 } as const;
 
-
+export type SpiderRegistry = typeof spiderRegistry;

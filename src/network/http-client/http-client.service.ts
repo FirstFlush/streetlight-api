@@ -20,7 +20,11 @@ export class HttpClientService {
     private async request<T>(config: AxiosRequestConfig): Promise<T> {
         try {
             const response = await this.axios.request(config);
-            this.logger.debug(`HTTP request successful. Status code ${response.status} for url ${config.url}`)
+            if (response.status >= 200 && response.status < 300) {
+                this.logger.debug(`HTTP status ${response.status} for url ${config.url}`)
+            } else {
+                this.logger.error(`HTTP status ${response.status} for url ${config.url}. Response: ${response}`)
+            }
 
             const data = config.responseType === 'arraybuffer'
                 ? (Buffer.from(response.data) as T)
@@ -62,9 +66,10 @@ export class HttpClientService {
     }
 
     public async ninjaCrawl<NinjaCrawlResponse>(options: NinjaCrawlRequestOptions): Promise<NinjaCrawlResponse> {
-        console.log(`URL: ${process.env.NINJA_CRAWL_URL}`)
+        console.log('ninjaCrawl')
+        console.log(options.responseType)
         const config: AxiosRequestConfig = {
-            url: process.env.NINJA_CRAWL_URL,
+            url: process.env.NINJA_CRAWL_URL ?? "http://localhost:8000/scrape",
             method: "POST",
             data: options.data,
             headers: options.headers,
