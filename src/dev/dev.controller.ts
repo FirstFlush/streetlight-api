@@ -1,12 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import { SpiderJobRunner } from '@/spiders/job-runner';
 
 import { BC211SearchSpider } from '@/spiders/bc211/search/search-results.spider';
 import { BC211SearchPipeline } from '@/spiders/bc211/search/search-results.pipeline';
 
 import { BC211PdfSpider } from '@/spiders/bc211/pdf/pdf-shelter.spider';
 import { BC211PdfShelterPipeline } from '@/spiders/bc211/pdf/pdf-shelter-pipeline';
-
+import { SpiderJobRunner } from '@/spiders/job-runner';
 import { HttpClientService } from '@/network/http-client/http-client.service';
 
 @Controller('test')

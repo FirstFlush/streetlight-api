@@ -24,3 +24,11 @@ export class SpiderNetworkError extends SpiderException {
     this.name = 'SpiderNetworkException';
   }
 }
+
+
+export class NinjaCrawlNetworkError extends SpiderException {
+  constructor(message = 'Error reaching the Ninja Crawl scraping API') {
+    super(message);
+    this.name = 'NinjaCrawlNetworkError';
+  }
+}
