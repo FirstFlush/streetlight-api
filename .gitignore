@@ -1,0 +1,45 @@
+# Node
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.*.local
+
+# Logs
+logs/
+log/
+*.log
+
+# PM2 logs & process files
+pids/
+pmlogs/
+*.pid
+*.pm2
+
+# Prisma
+prisma/migrations/
+prisma/dev.db
+*.sqlite
+*.db-journal
+
+# Playwright
+playwright/.cache/
+test-results/
+trace/
+
+# Docker
+docker-compose.override.yml
+*.local.yml
+*.tar
+*.img
+*.container
+*.pid
+
+# OS cruft
+.DS_Store
+Thumbs.db
