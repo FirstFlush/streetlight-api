@@ -20,6 +20,7 @@ export class SpiderJobRunner {
         spider: spider.key,
         jobId: this.jobId,
     })
+    this.spider.setLogger(this.log)
     this.log.debug(`Starting job ID ${this.jobId}`)
   }
 
